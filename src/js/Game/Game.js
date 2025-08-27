@@ -51,11 +51,12 @@ export default class Game {
     }
 
     finishGame() {
-        this.players.sort((a, b)=>b.score-a.score);
+        const ranking = [...this.players];
+        ranking.sort((a, b)=>b.score-a.score);
 
         this.publisher.notify({
             gameFinished : true,
-            ranking : [...this.players]
+            ranking : ranking
         });
     }
 

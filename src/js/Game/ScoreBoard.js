@@ -36,7 +36,7 @@ class Scores {
             this.bonusCrit += score;
         }
 
-        if (this.bonusCrit >= 63) {
+        if (this.bonusCrit >= 63 && this.bonus === null) {
             this.bonus = 35;
             added += 35;
             this.total += this.bonus;
