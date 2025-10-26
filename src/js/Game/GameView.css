@@ -98,6 +98,13 @@
     width: 600px;
 }
 
+.dice-board .panel-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: -0.5rem 0 0.25rem 0;
+}
+
 .dice-board h3 {
     margin: 0 0 0.5rem 0;
     color: #555;
@@ -109,6 +116,7 @@
     display: flex;
     gap: 0.75rem;
     min-height: 50px; /* 주사위가 없을 때도 높이 유지 */
+    position: relative; /* cup overlay positioning */
 }
 
 /* 주사위 모양 버튼 */
@@ -126,6 +134,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.die {
+    background: radial-gradient(circle at 30% 30%, #ffffff, #f0f0f0);
+    border: 1px solid #d8d8d8;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15), inset 0 0 4px rgba(0,0,0,0.05);
 }
 
 .dice-board button.rolled-dice {
@@ -148,7 +163,67 @@
 }
 
 .rolled-dice.is-rolling {
-  animation: shake 0.5s ease-in-out;
+  /* replaced shake with wander tumble for more physical feel */
+  animation: wander var(--dur, 0.9s) ease-in-out infinite alternate;
+}
+
+.rolled-dice.is-dropping {
+  animation: drop 0.6s cubic-bezier(0.2, 0.9, 0.25, 1);
+}
+
+/* dice rolling path using CSS variables */
+@keyframes wander {
+  0% {
+    transform: translate(0px, 0px) rotate(0deg) scale(1.0);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+  }
+  50% {
+    transform: translate(var(--dx, 30px), var(--dy, -20px)) rotate(var(--rot, 540deg)) scale(1.06);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.18);
+  }
+  100% {
+    transform: translate(calc(var(--dx, 30px) * -0.2), calc(var(--dy, -20px) * -0.2)) rotate(calc(var(--rot, 540deg) * 1.2)) scale(1.0);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.16);
+  }
+}
+
+@keyframes drop {
+  0% {
+    transform: translateY(-120px) scale(1.04);
+    filter: brightness(1.05);
+  }
+  70% {
+    transform: translateY(8px) scale(0.98);
+  }
+  85% {
+    transform: translateY(-6px) scale(1.01);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    filter: brightness(1);
+  }
+}
+
+/* cup overlay while rolling */
+.dice-cup {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 20%, rgba(0,0,0,0.06), rgba(0,0,0,0.0) 60%);
+  border-radius: 12px;
+  animation: cup-tilt 0.8s ease-in-out infinite alternate;
+}
+
+@keyframes cup-tilt {
+  0% {
+    transform: rotate(0deg) scale(1.0);
+  }
+  100% {
+    transform: rotate(2.5deg) scale(1.02);
+  }
 }
 
 
@@ -174,23 +249,9 @@
     cursor: not-allowed;
 }
 
-#game-status-bar {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-}
+.game-status { }
 
-.btn-show-scoreboard {
-    position: absolute;
-    left: 0;
-    top: 50%;
-    padding: 0.8rem;
-    font-size: 1.2rem;
-    font-weight: bold;
-    /* color: white; */
-    border: none;
-    border-radius: 8px;
-}
+/* scoreboard toggle now uses .icon-button in GameUI.css */
 
 .game-result-ranking {
     /* width: 50%; */
@@ -222,7 +283,7 @@
 }
 
 .best-category-label {
-    opacity: 0%;
+    opacity: 0;
     /* visibility: hidden; */
     position: absolute;
     top: 20px;
@@ -231,7 +292,7 @@
 }
 
 .best-category-label.show {
-    opacity: 100%;
+    opacity: 1;
     /* visibility: visible; */
     transition: opacity 0.5s ease-in-out;
 

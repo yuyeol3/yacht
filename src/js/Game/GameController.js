@@ -30,7 +30,7 @@ class GameController {
      * 
      * @returns {Player[]}
      */
-    getPlayes() {
+    getPlayers() {
         return this.players;
     }
 
@@ -47,8 +47,20 @@ class GameController {
     }
 
     roll() {
-        this.diceBoard.roll();
-        this.scoreBoard.calcScores(this.diceBoard.getDiceStatus());
+        this.startRoll();
+        setTimeout(() => this.stopRoll(), 500);
+    }
+
+    startRoll() {
+        this.diceBoard.startRoll();
+    }
+
+    stopRoll() {
+        const wasRolling = this.diceBoard.isRolling;
+        this.diceBoard.stopRoll();
+        if (wasRolling) {
+            this.scoreBoard.calcScores(this.diceBoard.getDiceStatus());
+        }
     }
 
     /**

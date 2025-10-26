@@ -149,12 +149,16 @@ export default class ScoreBoard {
             }
         }
 
-        let maxName;
+        let maxName = "";
         let maxPoint = 0;
         for (const k of Object.keys(result)) {
-            if (k !== null &&
-                !["ones", "twos", "threes", "fours", "fives", "sixes", "choice"].includes(k) && 
-                 result[k] > maxPoint) {
+            if (
+                k !== null &&
+                !["ones", "twos", "threes", "fours", "fives", "sixes", "choice"].includes(k) &&
+                result[k] != null &&
+                result[k] > maxPoint
+            ) {
+                maxPoint = result[k];
                 maxName = k.replaceAll("_", " ").toUpperCase();
             }
         }

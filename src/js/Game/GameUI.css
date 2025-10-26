@@ -1,0 +1,159 @@
+/* Theme variables */
+:root {
+  --bg: #f7f6f2;
+  --card: #ffffff;
+  --text: #333333;
+  --muted: #6b7280;
+  --primary: #4a90e2;
+  --primary-600: #357ac6;
+  --accent: #d0021b;
+  --border: #e5e7eb;
+  --shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* Container */
+.app-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Header (Game) */
+.game-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.game-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.game-status {
+  display: flex;
+  gap: 1rem;
+  align-items: baseline;
+  color: var(--muted);
+}
+
+.game-status h3 { margin: 0; }
+
+.icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+}
+
+.icon-button:hover { border-color: var(--primary); }
+
+/* Start screen */
+.start-screen {
+  display: flex;
+  justify-content: center;
+}
+
+.entry-card {
+  width: 680px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.entry-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.entry-head h1 { font-size: 1.6rem; margin: 0; }
+.entry-head p { color: var(--muted); margin: 0; }
+
+.player-input {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.text-input {
+  flex: 1;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  outline: none;
+}
+
+.text-input:focus { border-color: var(--primary); }
+
+.primary-button {
+  padding: 0.7rem 1rem;
+  border: none;
+  border-radius: 10px;
+  background: var(--primary);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+}
+
+.primary-button:hover { background: var(--primary-600); }
+.primary-button:disabled {
+  background: #cbd5e1;
+  cursor: not-allowed;
+}
+
+.secondary-button {
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--card);
+  cursor: pointer;
+}
+
+.player-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.player-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: #fafafa;
+}
+
+.player-chip .avatar {
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #e5effb;
+  color: #1f4fa3;
+  font-weight: 800;
+}
+
+.player-chip .remove {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--muted);
+}
+
